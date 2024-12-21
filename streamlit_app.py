@@ -61,7 +61,10 @@ else:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-        
+        messages=[
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.messages
+            ]
         # Generate a response using the OpenAI API.
         stream = chat_session.send_message(prompt)
 
