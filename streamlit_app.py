@@ -46,7 +46,7 @@ else:
 )   
     
     if "messages" not in st.session_state:
-        st.session_state.messages = []
+       st.session_state.messages = []
 
     # Display the existing chat messages via `st.chat_message`.
     for message in st.session_state.messages:
@@ -61,15 +61,13 @@ else:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-        messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ]
+        
         # Generate a response using the OpenAI API.
         stream = chat_session.send_message(prompt)
 
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.
-        with st.chat_message("assistant"):
+        with st.chat_message("model"):
             response = st.write(stream.parts[1].text)
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        st.session_state.messages.append({"role": "model", "content": stream.parts[1].text})
+        
