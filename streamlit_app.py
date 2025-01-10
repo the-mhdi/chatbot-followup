@@ -57,7 +57,7 @@ else:
       ],
     },
   ]
-    patient_rec = st.text_area("patient record")
+    patient_rec = st.text_area("Patient Record")
     if patient_rec:  # Only append if patient_rec has a value
         history.append({"role": "user", "parts": [patient_rec]})
     chat_session = model.start_chat(history=history)   
