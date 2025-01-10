@@ -62,11 +62,10 @@ else:
         history.append({"role": "user", "parts": [patient_rec]})
     chat_session = model.start_chat(history=history)   
     
-    #uploaded_file = st.file_uploader(
-    ##   "Upload a document (.txt)", type=("txt")
-    #)
-    #document = uploaded_file.read().decode()
-    #history.append({"role": "user", "parts": f"Here's a patient's document: {document}"})
+    uploaded_file = st.file_uploader("Upload a document")
+    if uploaded_file is not None:
+      document = uploaded_file.read()
+      history.append({"role": "user", "parts": f"Here's a patient's document: {document}"})
 
     if "messages" not in st.session_state:
        st.session_state.messages = []
