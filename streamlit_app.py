@@ -64,7 +64,7 @@ else:
     
     uploaded_file = st.file_uploader("Upload a document")
     if uploaded_file is not None:
-      document = uploaded_file.read()
+      document = uploaded_file.read().decode()
       history.append({"role": "user", "parts": f"Here's a patient's document: {document}"})
 
     if "messages" not in st.session_state:
