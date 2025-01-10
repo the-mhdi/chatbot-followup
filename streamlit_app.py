@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Show title and description.
-st.title("💬 Chatbot")
+st.title("💬 SAAiP")
 st.write(
     "This is a simple chatbot"
 )
