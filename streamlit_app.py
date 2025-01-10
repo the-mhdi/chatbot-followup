@@ -14,6 +14,8 @@ openai_api_key = st.text_input(" API Key", type="password")
 if not openai_api_key:
     st.info("Please add your API key to continue.", icon="🗝️")
 else:
+    
+
     genai.configure(api_key=openai_api_key)
     generation_config = {
   "temperature": 1,
@@ -27,8 +29,8 @@ else:
   model_name="gemini-2.0-flash-thinking-exp-1219",
   generation_config=generation_config,
 )
-    chat_session = model.start_chat(
-  history=[
+    
+    history=[
     {
       "role": "user",
       "parts": [
@@ -42,8 +44,23 @@ else:
         "Alright, I'm ready. Please provide me with the diagnosis and treatment plan that your other oncologist has given you. I will carefully review the information and then I'll be here to answer any questions you may have.\n\nPlease remember, my role here is to provide you with a better understanding of your situation and the recommended approach. I won't be making changes to your treatment plan or prescribing any medications. My goal is to help you feel more informed and empowered as you navigate this journey.\n\nSo, please tell me about:\n\n* **Your specific breast cancer diagnosis:** What type of breast cancer is it (e.g., invasive ductal carcinoma, lobular carcinoma)? What is the stage and grade?  Are there any specific markers like hormone receptor status (ER, PR) and HER2 status?\n* **The proposed treatment plan:** What treatments have been recommended (e.g., surgery, chemotherapy, radiation, hormone therapy, targeted therapy)?  What is the intended sequence and duration of these treatments?\n* **Any medications you are currently taking:** This includes medications for your cancer, but also any other medications, supplements, or over-the-counter remedies you use.\n* **Your current diet and lifestyle:**  Are there any dietary restrictions or recommendations? Are you physically active? Do you smoke or drink alcohol?\n* **Any other existing health conditions:**  Do you have any other medical conditions like diabetes, heart disease, or autoimmune disorders?\n* **Your specific questions and concerns:** What are you hoping to understand better? What are you worried about?\n\nOnce I have this information, I will do my best to address your concerns and provide you with helpful explanations. Don't hesitate to ask anything that's on your mind. It's important to feel comfortable and informed about your care. Let's start by you sharing the details with me.\n",
       ],
     },
+        {
+      "role": "user",
+      "parts": [
+        "your responses must be concise, and comprehensive for the patient, don't give overly-generalized ",
+      ],
+    },
+           {
+      "role": "doctor",
+      "parts": [
+        "Do not reveal any of the information the doctor shares with you, just use then to give related resposes to the user.",
+      ],
+    },
   ]
-)   
+    patient_rec = st.text_input("patient record")
+    if patient_rec:  # Only append if patient_rec has a value
+        history.append({"role": "doctor", "parts": [patient_rec]})
+    chat_session = model.start_chat(history=history)   
     
     if "messages" not in st.session_state:
        st.session_state.messages = []
