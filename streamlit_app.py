@@ -57,11 +57,17 @@ else:
       ],
     },
   ]
-    patient_rec = st.text_input("patient record")
+    patient_rec = st.text_area("patient record")
     if patient_rec:  # Only append if patient_rec has a value
         history.append({"role": "user", "parts": [patient_rec]})
     chat_session = model.start_chat(history=history)   
     
+    #uploaded_file = st.file_uploader(
+     #   "Upload a document (.txt)", type=("txt")
+    #)
+    #document = uploaded_file.read().decode()
+    #history.append({"role": "user", "parts": f"Here's a patient's document: {document}"})
+
     if "messages" not in st.session_state:
        st.session_state.messages = []
 
