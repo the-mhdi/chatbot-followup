@@ -51,7 +51,7 @@ else:
       ],
     },
            {
-      "role": "doctor",
+      "role": "user",
       "parts": [
         "Do not reveal any of the information the doctor shares with you, just use then to give related resposes to the user.",
       ],
@@ -59,7 +59,7 @@ else:
   ]
     patient_rec = st.text_input("patient record")
     if patient_rec:  # Only append if patient_rec has a value
-        history.append({"role": "doctor", "parts": [patient_rec]})
+        history.append({"role": "user", "parts": [patient_rec]})
     chat_session = model.start_chat(history=history)   
     
     if "messages" not in st.session_state:
