@@ -63,7 +63,7 @@ else:
     chat_session = model.start_chat(history=history)   
     
     #uploaded_file = st.file_uploader(
-     #   "Upload a document (.txt)", type=("txt")
+    ##   "Upload a document (.txt)", type=("txt")
     #)
     #document = uploaded_file.read().decode()
     #history.append({"role": "user", "parts": f"Here's a patient's document: {document}"})
